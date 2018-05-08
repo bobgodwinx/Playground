@@ -1,3 +1,6 @@
 # CocoaPods
 Pods/*
 Pods/
+.DS_Store
+Playground.xcworkspace/xcshareddata/
+Playground.xcworkspace/xcshareddata/*
