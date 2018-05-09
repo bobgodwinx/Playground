@@ -24,7 +24,7 @@ class AnyRow<I>: Row {
         configureClosure(model)
     }
 }
-/// `ProductCell` 
+/// `ProductCell`
 class ProductCell: Row {
     typealias Model = Product
 
@@ -32,6 +32,22 @@ class ProductCell: Row {
 
     init(name: String) {
         self.name = name
+    }
+
+    func configure(with model: Model) {
+        print("PATs PlaceHolder is now `Product` Concrete Type)")
+        print("This will now be configured based on \(type(of: self))")
+    }
+}
+/// `ProductDetailsCell`
+class ProductDetailsCell: Row {
+    typealias Model = Product
+    let name: String
+    let category: String
+
+    init(name: String, category: String) {
+        self.name = name
+        self.category = category
     }
 
     func configure(with model: Model) {
