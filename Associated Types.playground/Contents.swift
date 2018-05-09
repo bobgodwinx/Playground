@@ -8,3 +8,7 @@ protocol Row {
     /// - Recieves a parameter of Concrete Type `Model`
     func configure(with model: Model)
 }
+/// Concrete Type `Product`
+struct Product { }
+/// Concrete Type `Item`
+struct Item { }
