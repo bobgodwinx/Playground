@@ -13,7 +13,7 @@ struct Product { }
 /// Concrete Type `Item`
 struct Item { }
 /// Wrapper `AnyRow
-class AnyRow<I>: Row {
+struct AnyRow<I>: Row {
     private let configureClosure: (I) -> Void
 
     init<T: Row>(_ row: T) where T.Model == I {
@@ -79,3 +79,20 @@ struct AnyCellRow: Row {
         configureClosure(model)
     }
 }
+/// `ItemCell`
+class ItemCell: Row {
+    typealias Model = Item
+
+    let id: String
+
+    init(id: String) {
+        self.id = id
+    }
+
+    func configure(with model: Item) {
+        print("PATs PlaceHolder is now `Item` Concrete Type)")
+        print("This will now be configured based on \(type(of: self))")
+    }
+}
+
+
