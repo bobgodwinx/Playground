@@ -61,3 +61,21 @@ let productDetailsCell = ProductDetailsCell(name: "product-name", category: "ABC
 let cells: [AnyRow<Product>] = [AnyRow(productCell), AnyRow(productDetailsCell)]
 let product = Product()
 cells.forEach { cell in cell.configure(with: product) }
+
+/// Heterogeneous Requirement and Dynamic dispatch availability
+/// Generic Wrapper `AnyCellRow` to match Heterogeneous Types + Dynamic Dispatch
+struct AnyCellRow: Row {
+
+    private let configureClosure: (Any) -> Void
+
+    init<I: Row>(_ row: I) {
+        configureClosure = { object in
+            guard let model = object as? I.Model else { return }
+            row.configure(with: model)
+        }
+    }
+
+    func configure(with model: Any) {
+        configureClosure(model)
+    }
+}
