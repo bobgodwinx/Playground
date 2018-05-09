@@ -55,3 +55,9 @@ class ProductDetailsCell: Row {
         print("This will now be configured based on \(type(of: self))")
     }
 }
+/// Usage of PAT for Homogeneous Requirement
+let productCell = ProductCell(name: "product-name")
+let productDetailsCell = ProductDetailsCell(name: "product-name", category: "ABC-HT")
+let cells: [AnyRow<Product>] = [AnyRow(productCell), AnyRow(productDetailsCell)]
+let product = Product()
+cells.forEach { cell in cell.configure(with: product) }
