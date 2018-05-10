@@ -12,6 +12,9 @@ protocol Row {
 struct Product { }
 /// Concrete Type `Item`
 struct Item { }
+
+//MARK: - Closure Based Type Erasure
+
 /// Wrapper `AnyRow
 struct AnyRow<I>: Row {
     private let configureClosure: (I) -> Void
@@ -62,6 +65,8 @@ let cells: [AnyRow<Product>] = [AnyRow(productCell), AnyRow(productDetailsCell)]
 let product = Product()
 cells.forEach { cell in cell.configure(with: product) }
 
+//MARK: - `Any` Based Type Erasure
+
 /// Heterogeneous Requirement and Dynamic dispatch availability
 /// Generic Wrapper `AnyCellRow` to match Heterogeneous Types + Dynamic Dispatch
 struct AnyCellRow: Row {
@@ -94,7 +99,7 @@ class ItemCell: Row {
         print("This will now be configured based on \(type(of: self))")
     }
 }
-
+/// Usage of PAT for Heterogenous Requirement + Dynamic dispatch
 let item = Item()
 let itemCell = ItemCell(id: "an-itemCell")
 let allCells = [AnyCellRow(productCell), AnyCellRow(productDetailsCell), AnyCellRow(itemCell)]
@@ -102,3 +107,5 @@ let allCells = [AnyCellRow(productCell), AnyCellRow(productDetailsCell), AnyCell
 for (index, cell) in allCells.enumerated() {
     index <= 1 ? cell.configure(with: product) : cell.configure(with: item)
 }
+
+//MARK: - `Shadowed` Protocol Based Type Erasure
