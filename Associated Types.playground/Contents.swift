@@ -95,4 +95,10 @@ class ItemCell: Row {
     }
 }
 
+let item = Item()
+let itemCell = ItemCell(id: "an-itemCell")
+let allCells = [AnyCellRow(productCell), AnyCellRow(productDetailsCell), AnyCellRow(itemCell)]
 
+for (index, cell) in allCells.enumerated() {
+    index <= 1 ? cell.configure(with: product) : cell.configure(with: item)
+}
