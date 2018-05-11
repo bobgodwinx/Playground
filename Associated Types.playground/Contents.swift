@@ -121,4 +121,13 @@ protocol AssociatedTableRow: TableRow {
     /// - Recieves a parameter of Concrete Type `Model`
     func configure(with model: Model)
 }
+/// `extension` to conform to `TableRow`
+extension AssociatedTableRow {
+    /// TableRow - conformation
+    func configure(with model: Any) {
+        /// Just throw a fatalError
+        /// because we don't need it.
+        fatalError()
+    }
+}
 
