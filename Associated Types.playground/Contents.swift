@@ -73,9 +73,9 @@ struct AnyCellRow: Row {
 
     private let configureClosure: (Any) -> Void
 
-    init<I: Row>(_ row: I) {
+    init<T: Row>(_ row: T) {
         configureClosure = { object in
-            guard let model = object as? I.Model else { return }
+            guard let model = object as? T.Model else { return }
             row.configure(with: model)
         }
     }
