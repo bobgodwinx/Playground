@@ -130,11 +130,19 @@ extension AssociatedTableRow {
         fatalError()
     }
 }
-/// `ProductDetailsCellRow` 
+/// `ProductDetailsCellRow`
 class ProductDetailsCellRow: AssociatedTableRow {
     typealias Model = Product
 
     func configure(with model: Product) {
         print("AssociatedTableRow and Model is `Product`, Self is  \(type(of: self))")
+    }
+}
+/// `ItemCellRow`
+class ItemCellRow: AssociatedTableRow {
+    typealias Model = Item
+
+    func configure(with model: Item) {
+        print("AssociatedTableRow and Model is `Item`, Self is  \(type(of: self))")
     }
 }
