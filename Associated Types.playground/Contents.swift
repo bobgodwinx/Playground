@@ -110,8 +110,15 @@ for (index, cell) in allCells.enumerated() {
 
 //MARK: - `Shadowed` Protocol Based Type Erasure
 
+/// `shadow` protocol
 protocol TableRow {
     /// - Recieves a parameter of Concrete Type `Any`
     func configure(with model: Any)
+}
+/// `AssociatedTableRow` To be shadowed.
+protocol AssociatedTableRow: TableRow {
+    associatedtype Model
+    /// - Recieves a parameter of Concrete Type `Model`
+    func configure(with model: Model)
 }
 
