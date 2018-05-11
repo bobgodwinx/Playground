@@ -146,3 +146,16 @@ class ItemCellRow: AssociatedTableRow {
         print("AssociatedTableRow and Model is `Item`, Self is  \(type(of: self))")
     }
 }
+
+/// Usage of shadowed protocol styled type erasure
+let associatedTableRows: [TableRow] = [ProductDetailsCellRow(), ItemCellRow()]
+
+for row in associatedTableRows {
+    if let cell = row as? ProductDetailsCellRow {
+        cell.configure(with: product)
+    }
+
+    if let cell = row as? ItemCellRow {
+        cell.configure(with: item)
+    }
+}
