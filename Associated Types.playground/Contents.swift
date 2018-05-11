@@ -109,3 +109,9 @@ for (index, cell) in allCells.enumerated() {
 }
 
 //MARK: - `Shadowed` Protocol Based Type Erasure
+
+protocol TableRow {
+    /// - Recieves a parameter of Concrete Type `Any`
+    func configure(with model: Any)
+}
+
