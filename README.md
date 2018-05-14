@@ -5,7 +5,7 @@ This is generally where I do test and try codes for better understanding of what
 One of the most twisted topics in Swift is definitely `associatedtype` . I am currently trying to literally break down this concept to a layman understanding and by so doing I could also understand it myself. 
 
 ### Definition of Associated Types
-`associatedtype` is a protocol placeholder for an unknown `Concrete Type`  that can be introduced later at the consumer side.  
+`associatedtype` is a protocol generic placeholder for an unknown `Concrete Type`  that requires concretization on adoption at the consumer side.  
 
 ### Problems solved by Associated Types
  - `associatedtype`  was introduced to solve the problem of rich and multi type abstraction which are not available in object-oriented subtyping.
