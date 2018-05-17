@@ -73,6 +73,33 @@ struct AnyCellRow: Row {
     }
 }
 ```
+
+- You can apply the `shadow pattern` as follows:ù
+```swift
+//MARK: - `Shadowed` Protocol Based Type Erasure
+
+/// `shadow` protocol
+protocol TableRow {
+    /// - Recieves a parameter of Concrete Type `Any`
+    func configure(with model: Any)
+}
+/// `Row` To be shadowed.
+protocol Row: TableRow {
+    associatedtype Model
+    /// - Recieves a parameter of Concrete Type `Model`
+    func configure(with model: Model)
+}
+/// `extension` to conform to `TableRow`
+extension Row {
+    /// TableRow - conformation
+    func configure(with model: Any) {
+        /// Just throw a fatalError
+        /// because we don't need it.
+        fatalError()
+    }
+}
+```
+
 - [Please see complete `associatedtype` article on medium](https://medium.com/@bobgodwinx/swift-associated-type-design-patterns-6c56c5b0a73a). <br />
 - [Full example code is also available on Playground](https://github.com/bobgodwinx/Playground/blob/master/Associated%20Types.playground/Contents.swift)
 
