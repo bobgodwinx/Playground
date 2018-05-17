@@ -32,6 +32,25 @@ struct Product { }
 struct Item { }
 
 ```
+- You can apply a `constrained type-erasure`  as  shown: 
+
+```swift
+/// Wrapper `AnyRow`
+struct AnyRow<I>: Row {
+    private let configureClosure: (I) -> Void
+    /// Initialiser guaratees that `Model`
+    /// should be a `Type` of `I`
+    init<T: Row>(_ row: T) where T.Model == I {
+        /// Matches the row `configure` func
+        /// to the private the `configureClosure`
+        configureClosure = row.configure
+    }
+    /// Conforming to `Row` protocol
+    func configure(with model: I) {
+        configureClosure(model)
+    }
+}
+```
 
 - [Please see complete `associatedtype` article on medium](https://medium.com/@bobgodwinx/swift-associated-type-design-patterns-6c56c5b0a73a). <br />
 - [Full example code is also available on Playground](https://github.com/bobgodwinx/Playground/blob/master/Associated%20Types.playground/Contents.swift)
