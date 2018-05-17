@@ -16,4 +16,7 @@ One of the most twisted topics in Swift is definitely `associatedtype` . I am cu
 - They help specify the precise and exact type of an object with a protocol subtyping.
 - They provide the relationship that you cannot fit into an object related type hierarchy.
 
+- [Please see complete `associatedtype` article on medium](https://medium.com/@bobgodwinx/swift-associated-type-design-patterns-6c56c5b0a73a). <br />
+- [Full example code is also available on Playground](https://github.com/bobgodwinx/Playground/blob/master/Associated%20Types.playground/Contents.swift)
+
 
