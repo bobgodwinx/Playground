@@ -52,6 +52,27 @@ struct AnyRow<I>: Row {
 }
 ```
 
+- You can apply a `unconstrained type-erasure`  as  shown:`
+
+```swift
+/// Generic Wrapper `AnyCellRow` to match Heterogeneous Types + Dynamic Dispatch
+struct AnyCellRow: Row {
+    private let configureClosure: (Any) -> Void
+
+    init<T: Row>(_ row: T) {
+        configureClosure = { object in
+            /// Asserting that `object` received is `type` of `T.Model`
+            guard let model = object as? T.Model else { return }
+            /// call the `T.configure` function on success
+            row.configure(with: model)
+        }
+    }
+    /// Conforming to `Row` protocol
+    func configure(with model: Any) {
+        configureClosure(model)
+    }
+}
+```
 - [Please see complete `associatedtype` article on medium](https://medium.com/@bobgodwinx/swift-associated-type-design-patterns-6c56c5b0a73a). <br />
 - [Full example code is also available on Playground](https://github.com/bobgodwinx/Playground/blob/master/Associated%20Types.playground/Contents.swift)
 
