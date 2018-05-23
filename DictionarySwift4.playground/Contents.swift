@@ -19,21 +19,25 @@ struct Person {
     let nationality: Nationality
 }
 
-class MyViewController : UIViewController {
 
-    let bag = DisposeBag()
-    override func loadView() {
-        let view = UIView()
-        view.backgroundColor = .white
+class ContactViewController : UITableViewController {
 
-        let label = UILabel()
-        label.frame = CGRect(x: 150, y: 200, width: 200, height: 20)
-        label.text = "Hello World!"
-        label.textColor = .black
-        
-        view.addSubview(label)
-        self.view = view
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
     }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .value2, reuseIdentifier: nil)
+        cell.textLabel?.text = "firstName: \(indexPath.row)"
+        cell.detailTextLabel?.text = "lastName: \(indexPath.row)"
+        return cell
+    }
+
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Section \(section)"
+    }
+
 }
+
 // Present the view controller in the Live View window
-PlaygroundPage.current.liveView = MyViewController()
+PlaygroundPage.current.liveView = ContactViewController(style: .plain)
