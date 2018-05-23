@@ -4,6 +4,14 @@ import RxSwift
 import UIKit
 import PlaygroundSupport
 
+enum Nationality: String {
+    case german
+    case italian
+    case chinese
+    case nigerian
+    case british
+}
+
 class MyViewController : UIViewController {
 
     let bag = DisposeBag()
