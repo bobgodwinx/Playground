@@ -30,6 +30,7 @@
 		870265144A0800538C262980 /* Pods-PlaygroundTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaygroundTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlaygroundTests/Pods-PlaygroundTests.release.xcconfig"; sourceTree = "<group>"; };
 		87586F45129E617AAA511DAA /* Pods-Playground.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Playground.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Playground/Pods-Playground.debug.xcconfig"; sourceTree = "<group>"; };
 		C41A1F7120A1A912001EA22E /* Associated Types.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Associated Types.playground"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		C4C7A3BD20B573F400517D0A /* DictionarySwift4.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = DictionarySwift4.playground; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C4D684A51F78F71C00E68131 /* Playground.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Playground.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4D684A81F78F71C00E68131 /* Playground.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Playground.h; sourceTree = "<group>"; };
 		C4D684A91F78F71C00E68131 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -126,6 +127,7 @@
 		C4D684BF1F78F8B200E68131 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				C4C7A3BD20B573F400517D0A /* DictionarySwift4.playground */,
 				C41A1F7120A1A912001EA22E /* Associated Types.playground */,
 				C4D684C01F78F8DD00E68131 /* README.md */,
 			);
