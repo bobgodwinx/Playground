@@ -3,7 +3,7 @@
 import RxSwift
 import UIKit
 import PlaygroundSupport
-
+/// `Nationality`
 enum Nationality: String {
     case german
     case italian
@@ -11,16 +11,34 @@ enum Nationality: String {
     case nigerian
     case british
 }
-
+/// `Person`
 struct Person {
     let firstName: String
     let lastName: String
     let age: Int
     let nationality: Nationality
 }
+/// `ContactViewController`
+class ContactViewController: UITableViewController {
 
-
-class ContactViewController : UITableViewController {
+    /// Only Leader and the richest
+    /// Disclaimer this data is just
+    /// for example purposes. I am not
+    /// responsible for any incorrect
+    /// information. I hereby declare
+    /// that I should not be held liable.
+    let contacts = [
+        Person(firstName: "Angela", lastName: "Merkel", age: 64, nationality: .german),
+        Person(firstName: "Theresa", lastName: "May", age: 61, nationality: .british),
+        Person(firstName: "Xi", lastName: "Jinping", age: 65, nationality: .chinese),
+        Person(firstName: "Muhammadu", lastName: "Buhari", age: 75, nationality: .nigerian),
+        Person(firstName: "Aliko", lastName: "Dangote", age: 61, nationality: .nigerian),
+        Person(firstName: "Michele", lastName: "Ferrero", age: 93, nationality: .italian),
+        Person(firstName: "Jack", lastName: "Ma", age: 53, nationality: .chinese),
+        Person(firstName: "Silvio", lastName: "Berlusconi", age: 81, nationality: .italian),
+        Person(firstName: "Richard", lastName: "Brandson", age: 67, nationality: .british),
+        Person(firstName: "Georg", lastName: "Schaeffler", age: 53, nationality: .german),
+        ]
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
