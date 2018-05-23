@@ -12,6 +12,13 @@ enum Nationality: String {
     case british
 }
 
+struct Person {
+    let firstName: String
+    let lastName: String
+    let age: Int
+    let nationality: Nationality
+}
+
 class MyViewController : UIViewController {
 
     let bag = DisposeBag()
