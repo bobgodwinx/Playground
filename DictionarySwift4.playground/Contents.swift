@@ -77,7 +77,17 @@ protocol TableRow {
 extension TableRow {
     var cellId: String { return Self.cellIdentifier }
 }
+/// `UITableView`
+extension UITableView {
+    func register(_ tableRows: [TableRow.Type]) {
+        tableRows.forEach { register($0) }
+    }
 
+    func register(_ row: TableRow.Type) {
+        let nib = UINib(nibName: row.nibName, bundle: nil)
+        register(nib, forCellReuseIdentifier: row.cellIdentifier)
+    }
+}
 /// `ContactViewController`
 class ContactViewController: UITableViewController {
 
