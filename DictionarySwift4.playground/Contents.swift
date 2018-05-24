@@ -88,6 +88,14 @@ extension UITableView {
         register(nib, forCellReuseIdentifier: row.cellIdentifier)
     }
 }
+/// `Contactable`
+protocol Contactable {
+    ///enter requirement
+}
+/// `ContactViewModel`
+class ContactViewModel: Contactable {
+    /// implement requirement
+}
 /// `ContactViewController`
 class ContactViewController: UITableViewController {
 
