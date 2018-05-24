@@ -1,6 +1,7 @@
 //: A UIKit based Playground for presenting user interface
   
 import RxSwift
+import RxCocoa
 import UIKit
 import PlaygroundSupport
 /// `Nationality`
@@ -18,6 +19,19 @@ struct Person {
     let age: Int
     let nationality: Nationality
 }
+
+
+protocol TableRow {
+    var configureCell: (UITableViewCell) -> Void { get }
+    static var cellIdentifier: String {get}
+    static var nibName: String { get }
+}
+
+extension TableRow {
+    var cellId: String { return Self.cellIdentifier }
+}
+
+
 /// `ContactViewController`
 class ContactViewController: UITableViewController {
 

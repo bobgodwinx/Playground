@@ -2,5 +2,10 @@
 <Timeline
    version = "3.0">
    <TimelineItems>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/bob/Documents/Projects/Playground/DictionarySwift4.playground#CharacterRangeLen=20&amp;CharacterRangeLoc=2457&amp;EndingColumnNumber=0&amp;EndingLineNumber=69&amp;StartingColumnNumber=16&amp;StartingLineNumber=68&amp;Timestamp=548871704.103348"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
    </TimelineItems>
 </Timeline>
