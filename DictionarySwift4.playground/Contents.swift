@@ -80,8 +80,28 @@ extension TableRow {
     var cellId: String { return Self.cellIdentifier }
 }
 
+/// `PersonCell`
+class PersonCell: UITableViewCell {
 
+    override init(style: UITableViewCellStyle = .value2, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
 
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
+
+    func bind(_ model: Person) {
+        self.textLabel?.text = model.firstName
+        self.detailTextLabel?.text = model.lastName
+        self.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        self.selectionStyle = .none
+    }
+}
+/// `PersonRow`
 struct PersonRow: TableRow {
     static var cellIdentifier: String { return "PersonRowCell" }
 
