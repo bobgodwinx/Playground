@@ -80,6 +80,20 @@ extension TableRow {
     var cellId: String { return Self.cellIdentifier }
 }
 
+
+
+struct PersonRow: TableRow {
+    static var cellIdentifier: String { return "PersonRowCell" }
+
+    let configureCell: (UITableViewCell) -> Void
+    init(_ model: Person) {
+        configureCell = {
+            guard let cell = $0 as? PersonCell else { return }
+            cell.bind(model)
+        }
+    }
+}
+
 /// `Contactable`
 protocol Contactable {
     var datasource: Driver<[TableDatasource.Section]> {get}
