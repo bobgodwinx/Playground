@@ -58,11 +58,12 @@ class TableDatasource: NSObject, UITableViewDataSource, RxTableViewDataSourceTyp
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = _model[indexPath.section].rows[indexPath.row]
         /// In your App you should be using the storyboard to dequeue different cells
+        /// If so then you can dequeue the cell as follows
         /// let cell = tableView.dequeueReusableCell(withIdentifier: item.cellId, for: indexPath)
-        /// for this example we going to use only `PersonCell` hope you get the trick
-        let _cell = PersonCell(style: .value2, reuseIdentifier: item.cellId)
-        item.configureCell(_cell)
-        return _cell
+        /// item.configuredCell(item.cellId, cell)
+        /// for this example we going to use only `PersonCell` so we pass a `nil`
+        /// and let the `TableRow` take care of it. hope you get the trick!
+        return item.configuredCell(item.cellId, nil)
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -72,7 +73,7 @@ class TableDatasource: NSObject, UITableViewDataSource, RxTableViewDataSourceTyp
 }
 /// `TableRow`
 protocol TableRow {
-    var configureCell: (UITableViewCell) -> Void { get }
+    var configuredCell: (_ id: String, _ cell: UITableViewCell?) -> UITableViewCell { get }
     static var cellIdentifier: String {get}
 }
 
@@ -104,12 +105,17 @@ class PersonCell: UITableViewCell {
 /// `PersonRow`
 struct PersonRow: TableRow {
     static var cellIdentifier: String { return "PersonRowCell" }
+    let configuredCell: (_ id: String, _ cell: UITableViewCell?) -> UITableViewCell
 
-    let configureCell: (UITableViewCell) -> Void
     init(_ model: Person) {
-        configureCell = {
-            guard let cell = $0 as? PersonCell else { return }
+        configuredCell = { id, cell in
+            guard let cell = cell as? PersonCell else {
+                let cell = PersonCell(style: .value2, reuseIdentifier: id)
+                cell.bind(model)
+                return cell
+            }
             cell.bind(model)
+            return cell
         }
     }
 }
