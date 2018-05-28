@@ -13,7 +13,7 @@ enum Nationality: String {
     case british
 }
 /// `Person`
-struct Person {
+struct Person: Hashable {
     let firstName: String
     let lastName: String
     let age: Int
@@ -119,18 +119,49 @@ struct PersonRow: TableRow {
         }
     }
 }
+/// `ContactProviderType` = `Model` requirement
+protocol ContactProviderType {
+    /// Set that contains `Person`
+    var contacts: Observable<Set<Person>> {get}
+}
+/// `ContactProvider` = `Model`
+class ContactProvider: ContactProviderType {
+    let contacts: Observable<Set<Person>>
 
-/// `Contactable`
+    init() {
+        /// Only Leader and the richest
+        /// Disclaimer this data is just
+        /// for example purposes. I am not
+        /// responsible for any incorrect
+        /// information. I hereby declare
+        /// that I should not be held liable.
+        self.contacts = Observable.of([
+            Person(firstName: "Angela", lastName: "Merkel", age: 64, nationality: .german),
+            Person(firstName: "Theresa", lastName: "May", age: 61, nationality: .british),
+            Person(firstName: "Xi", lastName: "Jinping", age: 65, nationality: .chinese),
+            Person(firstName: "Muhammadu", lastName: "Buhari", age: 75, nationality: .nigerian),
+            Person(firstName: "Aliko", lastName: "Dangote", age: 61, nationality: .nigerian),
+            Person(firstName: "Michele", lastName: "Ferrero", age: 93, nationality: .italian),
+            Person(firstName: "Jack", lastName: "Ma", age: 53, nationality: .chinese),
+            Person(firstName: "Silvio", lastName: "Berlusconi", age: 81, nationality: .italian),
+            Person(firstName: "Richard", lastName: "Brandson", age: 67, nationality: .british),
+            Person(firstName: "Georg", lastName: "Schaeffler", age: 53, nationality: .german),
+            ])
+    }
+}
+
+/// `Contactable` = `ViewModel` requirement
 protocol Contactable {
     var datasource: Driver<[TableDatasource.Section]> {get}
 }
-/// `ContactViewModel`
+/// `ContactViewModel` = `ViewModel`
 class ContactViewModel: Contactable {
 
     let datasource: Driver<[TableDatasource.Section]>
-    /// `init`
-    init(_ provider: Observable<[Person]>) {
+    /// `dependency inversion`
+    init(_ provider: ContactProviderType) {
         self.datasource = provider
+            .contacts
             .map { items -> [TableDatasource.Section] in
                  /// groupedByNationality = [Nationality: [Person]]` ///new feature in swift 4.x
                  /// let groupedByNationality  = Dictionary(grouping: items) { $0.nationality }
@@ -146,31 +177,18 @@ class ContactViewModel: Contactable {
             .asDriver(onErrorJustReturn: [])
     }
 }
-/// Only Leader and the richest
-/// Disclaimer this data is just
-/// for example purposes. I am not
-/// responsible for any incorrect
-/// information. I hereby declare
-/// that I should not be held liable.
-let contacts = [
-    Person(firstName: "Angela", lastName: "Merkel", age: 64, nationality: .german),
-    Person(firstName: "Theresa", lastName: "May", age: 61, nationality: .british),
-    Person(firstName: "Xi", lastName: "Jinping", age: 65, nationality: .chinese),
-    Person(firstName: "Muhammadu", lastName: "Buhari", age: 75, nationality: .nigerian),
-    Person(firstName: "Aliko", lastName: "Dangote", age: 61, nationality: .nigerian),
-    Person(firstName: "Michele", lastName: "Ferrero", age: 93, nationality: .italian),
-    Person(firstName: "Jack", lastName: "Ma", age: 53, nationality: .chinese),
-    Person(firstName: "Silvio", lastName: "Berlusconi", age: 81, nationality: .italian),
-    Person(firstName: "Richard", lastName: "Brandson", age: 67, nationality: .british),
-    Person(firstName: "Georg", lastName: "Schaeffler", age: 53, nationality: .german),
-]
 
-let provider = Observable.of(contacts)
-let viewModel = ContactViewModel(provider)
-
-/// `ContactViewController`
+/// `ContactViewController` = `View`
 class ContactViewController: UIViewController {
     private let bag = DisposeBag()
+    let viewModel: Contactable
+    /// `dependency inversion`
+    init(_ viewModel: Contactable) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) { fatalError() }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -190,5 +208,15 @@ class ContactViewController: UIViewController {
     }
 }
 
+/// Now composing our `MVVM`
+/// just like a plug and play
+
+/// `Model`
+let provider = ContactProvider()
+/// `ViewModel`
+let viewModel = ContactViewModel(provider)
+/// `View`
+let viewController = ContactViewController(viewModel)
+
 // Present the view controller in the Live View window
-PlaygroundPage.current.liveView = ContactViewController()
+PlaygroundPage.current.liveView = viewController
