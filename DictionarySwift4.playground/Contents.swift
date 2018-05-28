@@ -182,18 +182,15 @@ class ContactViewModel: Contactable {
 class ContactViewController: UIViewController {
     private let bag = DisposeBag()
     let viewModel: Contactable
+    
     /// `dependency inversion`
     init(_ viewModel: Contactable) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder aDecoder: NSCoder) { fatalError() }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
         configure()
     }
+
+    required init?(coder aDecoder: NSCoder) { fatalError("Please initialise programmatically") }
 
     private func configure() {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 768, height: 1024), style: .plain)
