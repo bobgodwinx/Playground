@@ -2,8 +2,11 @@
   
 import RxSwift
 import RxCocoa
+import RxTest
 import UIKit
 import PlaygroundSupport
+import XCTest
+
 /// `Nationality`
 enum Nationality: String {
     case german
@@ -217,3 +220,43 @@ let viewController = ContactViewController(viewModel)
 
 // Present the view controller in the Live View window
 PlaygroundPage.current.liveView = viewController
+
+/// I need to figure out how to run tests
+/// in a playground. This is very important!
+class MockContactProvider: ContactProviderType {
+
+    let persons: Set<Person> = [Person(firstName: "Test-firstname-01", lastName: "Test-lastname-01", age: 100, nationality: .german),
+                                Person(firstName: "Test-firstname-02", lastName: "Test-lastname-02", age: 100, nationality: .british)]
+    var contacts: Observable<Set<Person>>  {
+        return Observable.of(persons)
+    }
+}
+
+class ContactViewModelTests: XCTestCase {
+
+    var provider: MockContactProvider!
+    var viewModel: ContactViewModel!
+    var scheduler: TestScheduler!
+    var observer: TestableObserver<[TableDatasource.Section]>!
+
+    override func setUp() {
+        super.setUp()
+        provider = MockContactProvider()
+        viewModel = ContactViewModel(provider)
+        scheduler = TestScheduler(initialClock: 0)
+        observer = scheduler.createObserver([TableDatasource.Section].self)
+        _ = viewModel.datasource.asObservable().subscribe(observer)
+        scheduler.start()
+    }
+
+    override func tearDown() {
+        provider = nil
+        viewModel = nil
+        scheduler = nil
+    }
+
+
+    func testNumberOfSections() {
+        XCTAssertEqual(observer.events.count, 1)
+    }
+}
