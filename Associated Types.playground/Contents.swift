@@ -12,6 +12,8 @@ protocol Row {
 struct Product { }
 /// Concrete Type `Item`
 struct Item { }
+/// Concrete Type `ProductDetail`
+struct ProductDetail { }
 
 //MARK: - Constrained Type Erasure
 
@@ -128,7 +130,7 @@ protocol AssociatedTableRow: TableRow {
     func configure(with model: Model)
 }
 /// `extension` to conform to `TableRow`
-extension AssociatedTableRow {
+extension TableRow {
     /// TableRow - conformation
     func configure(with model: Any) {
         /// Just throw a fatalError
@@ -138,12 +140,13 @@ extension AssociatedTableRow {
 }
 /// `ProductDetailsCellRow`
 class ProductDetailsCellRow: AssociatedTableRow {
-    typealias Model = Product
+    typealias Model = ProductDetail
     /// Conforming to `TableRow` protocol
-    func configure(with model: Product) {
-        print("AssociatedTableRow and Model is `Product`, Self is  \(type(of: self))")
+    func configure(with model: ProductDetail) {
+        print("AssociatedTableRow and Model is `ProductDetail`, Self is  \(type(of: self))")
     }
 }
+
 /// `ItemCellRow`
 class ItemCellRow: AssociatedTableRow {
     typealias Model = Item
@@ -153,12 +156,24 @@ class ItemCellRow: AssociatedTableRow {
     }
 }
 
+class ProductCellRow: AssociatedTableRow {
+    typealias Model = Product
+    /// Conforming to `TableRow` protocol
+    func configure(with model: Product) {
+        print("AssociatedTableRow and Model is `Product`, Self is  \(type(of: self))")
+    }
+}
+let productDetail = ProductDetail()
 /// Usage of shadowed protocol styled type erasure
-let associatedTableRows: [TableRow] = [ProductDetailsCellRow(), ItemCellRow()]
+let associatedTableRows: [TableRow] = [ProductCellRow(), ProductDetailsCellRow(), ItemCellRow()]
 
 for row in associatedTableRows {
-    if let cell = row as? ProductDetailsCellRow {
+    if let cell = row as? ProductCellRow {
         cell.configure(with: product)
+    }
+
+    if let cell = row as? ProductDetailsCellRow {
+        cell.configure(with: productDetail)
     }
 
     if let cell = row as? ItemCellRow {
