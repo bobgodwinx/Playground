@@ -79,15 +79,25 @@ class ViewModel: ViewModelType {
 /// `ViewController`
 class ViewController: UIViewController {
     private let bag = DisposeBag()
-    private let loadingIndicator = PublishRelay<RxMBProgressHUD.State>()
+    private let indicator = PublishRelay<RxMBProgressHUD.State>()
     private let viewModel: ViewModelType
 
     init(_ viewModel: ViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        configure()
     }
 
     required init?(coder aDecoder: NSCoder) { fatalError("Please initialise programmatically") }
+
+    private func configure() {
+        self.view.backgroundColor = .red
+
+        indicator.bind(to: RxMBProgressHUD.shared).disposed(by: bag)
+        viewModel.finished
+            .subscribe(onCompleted: { self.indicator.accept(RxMBProgressHUD.State.hide(view: self.view, animated: true)) })
+            .disposed(by: bag)
+    }
 
     private func configuredImageView() -> UIImageView {
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 375.0, height: 668.0))
