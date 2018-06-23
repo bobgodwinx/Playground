@@ -64,6 +64,7 @@ class ViewModel: ViewModelType {
 /// `ViewController`
 class ViewController: UIViewController {
     private let bag = DisposeBag()
+    private let loadingIndicator = PublishRelay<RxMBProgressHUD.State>()
     private let viewModel: ViewModelType
 
     init(_ viewModel: ViewModelType) {
@@ -72,4 +73,11 @@ class ViewController: UIViewController {
     }
 
     required init?(coder aDecoder: NSCoder) { fatalError("Please initialise programmatically") }
+
+    private func configuredImageView() -> UIImageView {
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 375.0, height: 668.0))
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        return imageView
+    }
 }
