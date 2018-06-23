@@ -4,7 +4,7 @@ import RxSwift
 import RxCocoa
 import MBProgressHUD
 import SwiftGifOrigin
-
+/// `Utility`
 class RxMBProgressHUD: ObserverType {
 
     static let shared = RxMBProgressHUD()
@@ -43,7 +43,7 @@ typealias Resource = (response: HTTPURLResponse, data: Data)
 protocol ModelType {
     var datasource: Observable<Resource> {get}
 }
-
+/// `Model`
 struct Model: ModelType {
     var datasource: Observable<Resource> {
         let url = URL(string: "https://media.giphy.com/media/5z08WdHr0h9SHZekve/giphy.gif")!
@@ -59,7 +59,7 @@ protocol ViewModelType {
     var source: Driver<UIImage?> {get}
     var finished: Completable {get}
 }
-
+/// `ViewModel`
 class ViewModel: ViewModelType {
     let source: Driver<UIImage?>
     let finished: Completable
@@ -75,7 +75,6 @@ class ViewModel: ViewModelType {
             .asCompletable()
     }
 }
-
 /// `ViewController`
 class ViewController: UIViewController {
     private let bag = DisposeBag()
@@ -89,6 +88,19 @@ class ViewController: UIViewController {
     }
 
     required init?(coder aDecoder: NSCoder) { fatalError("Please initialise programmatically") }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        indicator.accept(RxMBProgressHUD.State.show(view: self.view, animated: true))
+        let imageView = configuredImageView()
+        view.addSubview(imageView)
+
+        viewModel
+            .source
+            .drive(imageView.rx.image)
+            .disposed(by: bag)
+    }
 
     private func configure() {
         self.view.backgroundColor = .red
