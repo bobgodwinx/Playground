@@ -60,3 +60,16 @@ class ViewModel: ViewModelType {
         self.finished = datasource.observeOn(MainScheduler.asyncInstance).take(1).asCompletable()
     }
 }
+
+/// `ViewController`
+class ViewController: UIViewController {
+    private let bag = DisposeBag()
+    private let viewModel: ViewModelType
+
+    init(_ viewModel: ViewModelType) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) { fatalError("Please initialise programmatically") }
+}
