@@ -3,6 +3,7 @@
 import RxSwift
 import RxCocoa
 import MBProgressHUD
+import SwiftGifOrigin
 
 class RxMBProgressHUD: ObserverType {
 
@@ -40,4 +41,22 @@ extension ObservableType {
 protocol ViewModelType {
     var source: Driver<UIImage?> {get}
     var finished: Completable {get}
+}
+
+class ViewModel: ViewModelType {
+    let source: Driver<UIImage?>
+    let finished: Completable
+
+    init() {
+        let url = URL(string: "https://media.giphy.com/media/5z08WdHr0h9SHZekve/giphy.gif")!
+        let request = URLRequest(url: url)
+
+        let datasource = URLSession.shared.rx
+            .response(request: request)
+            .map { UIImage.gif(data: $0.data) }
+            .share(replay: 1, scope: .forever)
+
+        self.source = datasource.asDriver(onErrorJustReturn: nil)
+        self.finished = datasource.observeOn(MainScheduler.asyncInstance).take(1).asCompletable()
+    }
 }
