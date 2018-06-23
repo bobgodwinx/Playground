@@ -11,6 +11,7 @@ target 'Playground' do
   pod 'RxCocoa', '~> 4.2.0'
   pod 'RxTest', '~> 4.2.0'
   pod 'MBProgressHUD', '~> 1.1.0'
+  pod 'SwiftGifOrigin', '~> 1.6.1'
 
   target 'PlaygroundTests' do
     inherit! :search_paths
