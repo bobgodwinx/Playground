@@ -1,6 +1,7 @@
 //: Playground - noun: a place where people can play
 
 import RxSwift
+import RxCocoa
 import MBProgressHUD
 
 class RxMBProgressHUD: ObserverType {
@@ -34,4 +35,9 @@ extension ObservableType {
     func asCompletable() -> Completable {
         return ignoreElements()
     }
+}
+
+protocol ViewModelType {
+    var source: Driver<UIImage?> {get}
+    var finished: Completable {get}
 }
