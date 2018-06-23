@@ -38,6 +38,23 @@ extension ObservableType {
     }
 }
 
+typealias Resource = (response: HTTPURLResponse, data: Data)
+
+protocol ModelType {
+    var datasource: Observable<Resource> {get}
+}
+
+struct Model: ModelType {
+    var datasource: Observable<Resource> {
+        let url = URL(string: "https://media.giphy.com/media/5z08WdHr0h9SHZekve/giphy.gif")!
+        let request = URLRequest(url: url)
+
+        return URLSession.shared.rx
+            .response(request: request)
+            .share(replay: 1, scope: .forever)
+    }
+}
+
 protocol ViewModelType {
     var source: Driver<UIImage?> {get}
     var finished: Completable {get}
@@ -47,17 +64,15 @@ class ViewModel: ViewModelType {
     let source: Driver<UIImage?>
     let finished: Completable
 
-    init() {
-        let url = URL(string: "https://media.giphy.com/media/5z08WdHr0h9SHZekve/giphy.gif")!
-        let request = URLRequest(url: url)
-
-        let datasource = URLSession.shared.rx
-            .response(request: request)
+    init(_ model: ModelType) {
+        self.source = model.datasource
             .map { UIImage.gif(data: $0.data) }
-            .share(replay: 1, scope: .forever)
+            .asDriver(onErrorJustReturn: nil)
 
-        self.source = datasource.asDriver(onErrorJustReturn: nil)
-        self.finished = datasource.observeOn(MainScheduler.asyncInstance).take(1).asCompletable()
+        self.finished = model.datasource
+            .observeOn(MainScheduler.asyncInstance)
+            .take(1)
+            .asCompletable()
     }
 }
 
