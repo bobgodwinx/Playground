@@ -28,3 +28,10 @@ class RxMBProgressHUD: ObserverType {
         }
     }
 }
+
+//MARK: Completable
+extension ObservableType {
+    func asCompletable() -> Completable {
+        return ignoreElements()
+    }
+}
