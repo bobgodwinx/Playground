@@ -4,6 +4,8 @@ import RxSwift
 import RxCocoa
 import MBProgressHUD
 import SwiftGifOrigin
+import UIKit
+import PlaygroundSupport
 /// `Utility`
 class RxMBProgressHUD: ObserverType {
 
@@ -45,11 +47,13 @@ protocol ModelType {
 }
 /// `Model`
 struct Model: ModelType {
-    var datasource: Observable<Resource> {
+
+    let datasource: Observable<Resource>
+
+    init() {
         let url = URL(string: "https://media.giphy.com/media/5z08WdHr0h9SHZekve/giphy.gif")!
         let request = URLRequest(url: url)
-
-        return URLSession.shared.rx
+        self.datasource = URLSession.shared.rx
             .response(request: request)
             .share(replay: 1, scope: .forever)
     }
@@ -64,7 +68,7 @@ class ViewModel: ViewModelType {
     let source: Driver<UIImage?>
     let finished: Completable
 
-    init(_ model: ModelType) {
+    init(_ model: ModelType = Model()) {
         self.source = model.datasource
             .map { UIImage.gif(data: $0.data) }
             .asDriver(onErrorJustReturn: nil)
@@ -81,7 +85,7 @@ class ViewController: UIViewController {
     private let indicator = PublishRelay<RxMBProgressHUD.State>()
     private let viewModel: ViewModelType
 
-    init(_ viewModel: ViewModelType) {
+    init(_ viewModel: ViewModelType = ViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         configure()
@@ -118,3 +122,6 @@ class ViewController: UIViewController {
         return imageView
     }
 }
+
+// Present the view controller in the Live View window
+PlaygroundPage.current.liveView = ViewController()
