@@ -22,13 +22,11 @@ class RxMBProgressHUD: ObserverType {
         guard case .next(let state) = event else { return }
         switch state {
         case .hide(let view, let animated):
-            if let view = view {
-                MBProgressHUD.hide(for: view, animated: animated)
-            }
+            guard let view = view else { return }
+            MBProgressHUD.hide(for: view, animated: animated)
         case .show(let view, let animated):
-            if let view = view {
-                MBProgressHUD.showAdded(to:view, animated: animated)
-            }
+            guard let view = view else { return }
+            MBProgressHUD.showAdded(to:view, animated: animated)
         }
     }
 }
