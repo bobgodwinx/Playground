@@ -70,7 +70,7 @@ let cells: [AnyRow<Product>] = [AnyRow(productCell), AnyRow(productDetailsCell)]
 let product = Product()
 cells.forEach { cell in cell.configure(with: product) }
 
-//MARK: - Unconstra Type Erasure
+//MARK: - Unconstrained Type Erasure
 
 /// Heterogeneous Requirement and Dynamic dispatch availability
 /// Generic Wrapper `AnyCellRow` to match Heterogeneous Types + Dynamic Dispatch
@@ -99,10 +99,7 @@ class ItemCell: Row {
         self.id = id
     }
     /// Conforming to `Row` protocol
-    func configure(with model: Item) {
-        print("PATs PlaceHolder is now `Item` Concrete Type)")
-        print("This will now be configured based on \(type(of: self))")
-    }
+    func configure(with model: Item) { /*do stuffs here with `model`: Item */ }
 }
 /// Usage of PAT for Heterogenous Requirement + Dynamic dispatch
 let item = Item()
