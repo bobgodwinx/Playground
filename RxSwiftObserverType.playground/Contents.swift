@@ -56,12 +56,12 @@ struct Model: ModelType {
             .share(replay: 1, scope: .forever)
     }
 }
-
+/// `ViewModelType` is the contract
 protocol ViewModelType {
     var source: Driver<UIImage?> {get}
     var finished: Completable {get}
 }
-/// `ViewModel`
+/// `ViewModel` is the fulfillment of that contract
 class ViewModel: ViewModelType {
     let source: Driver<UIImage?>
     let finished: Completable
@@ -81,6 +81,7 @@ class ViewModel: ViewModelType {
 class ViewController: UIViewController {
     private let bag = DisposeBag()
     private let indicator = PublishRelay<RxMBProgressHUD.State>()
+    private let other = ReplaySubject<String>.create(bufferSize: 1)
     private let viewModel: ViewModelType
 
     init(_ viewModel: ViewModelType = ViewModel()) {
