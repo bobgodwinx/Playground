@@ -7,9 +7,9 @@ target 'Playground' do
 
   # Pods for Playground
   # RxSwift
-  pod 'RxSwift', '~> 4.2.0'
-  pod 'RxCocoa', '~> 4.2.0'
-  pod 'RxTest', '~> 4.2.0'
+  pod 'RxSwift', '~> 4.0'
+  pod 'RxCocoa', '~> 4.0'
+  pod 'RxTest', '~> 4.0'
   pod 'MBProgressHUD', '~> 1.1.0'
   pod 'SwiftGifOrigin', '~> 1.6.1'
 
