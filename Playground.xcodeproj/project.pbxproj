@@ -29,8 +29,6 @@
 		610C9A2CD0CE00A0D14223AA /* Pods_PlaygroundTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlaygroundTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		870265144A0800538C262980 /* Pods-PlaygroundTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaygroundTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlaygroundTests/Pods-PlaygroundTests.release.xcconfig"; sourceTree = "<group>"; };
 		87586F45129E617AAA511DAA /* Pods-Playground.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Playground.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Playground/Pods-Playground.debug.xcconfig"; sourceTree = "<group>"; };
-		C41A1F7120A1A912001EA22E /* Associated Types.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Associated Types.playground"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		C4C7A3BD20B573F400517D0A /* DictionarySwift4.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = DictionarySwift4.playground; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C4D684A51F78F71C00E68131 /* Playground.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Playground.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4D684A81F78F71C00E68131 /* Playground.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Playground.h; sourceTree = "<group>"; };
 		C4D684A91F78F71C00E68131 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -39,7 +37,10 @@
 		C4D684B51F78F71D00E68131 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4D684C01F78F8DD00E68131 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		C4D684C11F78F93500E68131 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		C4FFA4B320DC434F00A52ADA /* RxSwiftObserverType.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RxSwiftObserverType.playground; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		C4DB732C223818F600456685 /* RxSwiftObserverType.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RxSwiftObserverType.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		C4DB732D223818F600456685 /* GenericsProgramming.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = GenericsProgramming.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		C4DB732E223818F600456685 /* DictionarySwift4.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = DictionarySwift4.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		C4DB732F223818F600456685 /* Associated Types.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Associated Types.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D5DBA8BE678D0D0079F90058 /* Pods-PlaygroundTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaygroundTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlaygroundTests/Pods-PlaygroundTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E845B95F4CE9E01CD6FAD988 /* Pods_Playground.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Playground.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -128,9 +129,10 @@
 		C4D684BF1F78F8B200E68131 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				C4FFA4B320DC434F00A52ADA /* RxSwiftObserverType.playground */,
-				C4C7A3BD20B573F400517D0A /* DictionarySwift4.playground */,
-				C41A1F7120A1A912001EA22E /* Associated Types.playground */,
+				C4DB732F223818F600456685 /* Associated Types.playground */,
+				C4DB732E223818F600456685 /* DictionarySwift4.playground */,
+				C4DB732D223818F600456685 /* GenericsProgramming.playground */,
+				C4DB732C223818F600456685 /* RxSwiftObserverType.playground */,
 				C4D684C01F78F8DD00E68131 /* README.md */,
 			);
 			path = Source;

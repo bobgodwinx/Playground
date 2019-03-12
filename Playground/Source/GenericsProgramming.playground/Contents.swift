@@ -3,6 +3,8 @@
 import UIKit
 import PlaygroundSupport
 
+/// `MyViewController` will compute all
+/// required generic components
 class MyViewController : UIViewController {
     override func loadView() {
         let view = UIView()
