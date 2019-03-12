@@ -87,7 +87,7 @@ extension TableRow {
 /// `PersonCell`
 class PersonCell: UITableViewCell {
 
-    override init(style: UITableViewCellStyle = .value2, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle = .value2, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
 
